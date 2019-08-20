@@ -1,19 +1,3 @@
-// {
-//   "en": {
-//     "translation": {
-//       "Launch": {
-//         "StartResponse": {
-//           "card": {
-//             "text": "Hello {name}",
-//             "title": "My First Skill",
-//             "type": "Standard"
-//           },
-//           "say": "Hello {name}"
-//         }
-//       }
-//     }
-//   }
-// }
 {
   "en": {
     "translation": {
