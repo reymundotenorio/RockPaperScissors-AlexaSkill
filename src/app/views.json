@@ -38,6 +38,20 @@
       },
       "Bye": {
         "say": "That's all right, until next time!"
+      },
+      "SayGameScore": {
+        "say": "Currently, You have {userWins} wins and I have {alexaWins} wins"
+      },
+      "ContinueGame": {
+        "say": "Would you like to continue the game?",
+        "reprompt": "Continue the game?"
+      },
+      "NoGameScore": {
+        "say": "There's no score yet."
+      },
+      "StartNewGame": {
+        "say": "Would you like to start a new game?",
+        "reprompt": "Start new game?"
       }
     }
   }

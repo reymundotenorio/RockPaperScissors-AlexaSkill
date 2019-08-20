@@ -1,6 +1,9 @@
 function register(voxaApp) {
   // This will run when the user launches the skill 
-  voxaApp.onIntent("LaunchIntent", () => {
+  voxaApp.onIntent("LaunchIntent", voxaEvent => {
+    voxaEvent.model.userWins = 0;
+    voxaEvent.model.alexaWins = 0;
+
     return {
       flow: "continue",
       reply: "Welcome",
@@ -21,8 +24,7 @@ function register(voxaApp) {
   voxaApp.onState("getHowManyWins", voxaEvent => {
     if (voxaEvent.intent.name === "MaxWinsIntent") {
       voxaEvent.model.wins = voxaEvent.intent.params.wins;
-      voxaEvent.model.userWins = 0;
-      voxaEvent.model.alexaWins = 0;
+
       return {
         flow: "continue",
         reply: "StartGame",
@@ -184,6 +186,64 @@ function register(voxaApp) {
       reply: "Bye",
     };
   });
+
+  // Say the score at any time in the game
+  voxaApp.onIntent("SayScore", voxaEvent => {
+    if (voxaEvent.model.userWins > 0 || voxaEvent.model.alexaWins > 0) {
+      return {
+        flow: "continue",
+        reply: "SayGameScore",
+        to: "askContinueGame",
+      };
+    } else {
+      return {
+        flow: "continue",
+        reply: "SayGameScore",
+        to: "askStartNewGame",
+      };
+    }
+  });
+
+  // Check if the user said “yes” or “no”
+  voxaApp.onState("askContinueGame", () => {
+    return {
+      flow: "yield",
+      reply: "ContinueGame",
+      to: "shouldContinueTheGame",
+    };
+  });
+
+  // Check if the user said “yes” or “no”
+  voxaApp.onState("shouldContinueTheGame", voxaEvent => {
+    if (voxaEvent.intent.name === "YesIntent") {
+      return {
+        flow: "continue",
+        to: "askUserChoice",
+      };
+    }
+
+    if (voxaEvent.intent.name === "NoIntent") {
+      return {
+        flow: "terminate",
+        reply: "Bye",
+      };
+    }
+  });
+
+  // Ask if the user wants to start a new game
+  voxaApp.onState("askStartNewGame", () => {
+    return {
+      flow: "yield",
+      reply: "StartNewGame",
+      to: "shouldStartANewGame",
+    };
+  });
+
+
+
+
+
+
 }
 
 module.exports = register;

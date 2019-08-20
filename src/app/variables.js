@@ -1,7 +1,3 @@
-// exports.name = function (voxaEvent) {
-//   return voxaEvent.model.name;
-// };
-
 exports.userWins = function (voxaEvent) {
   return voxaEvent.model.userWins;
 };
