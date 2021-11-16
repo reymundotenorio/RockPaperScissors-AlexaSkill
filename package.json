@@ -11,7 +11,7 @@
   "author": "Reymundo Tenorio",
   "license": "MIT",
   "dependencies": {
-    "aws-sdk": "^2.326.0",
+    "aws-sdk": "^2.814.0",
     "lambda-log": "^2.0.0",
     "loader": "^2.1.1",
     "lodash": "^4.17.11",
